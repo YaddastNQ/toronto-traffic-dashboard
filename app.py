@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import joblib
 import os
 
 # --- 1. CONFIGURATION ---
@@ -14,8 +14,8 @@ def load_data():
     model_path = os.path.join(current_dir, 'traffic_rf_model.pkl')
     scaler_path = os.path.join(current_dir, 'traffic_scaler.pkl')
     if not os.path.exists(model_path): st.stop()
-    with open(model_path, 'rb') as f: model = pickle.load(f)
-    with open(scaler_path, 'rb') as f: scaler = pickle.load(f)
+    with open(model_path, 'rb') as f: model = joblib.load(f)
+    with open(scaler_path, 'rb') as f: scaler = joblib.load(f)
     return model, scaler
 
 model, scaler = load_data()
@@ -121,4 +121,5 @@ else:
 
 # --- FOOTER ---
 st.markdown("---") # Garis pemisah
+
 st.caption("© 2025 Telkom University | Developed by Kelompok Toronto | TK-46-03 | Data Science & Analysis ")
